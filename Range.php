@@ -1,14 +1,7 @@
 <?php
 
 function rangeZeroToFive($range) {
-  $rangeOutput ="{";
-
-  $startLoop = setStartLoop($range);
-  $endLoop = setEndLoop($range);
-  $rangeOutput = $rangeOutput. rangeOutput($startLoop, $endLoop);
-
-  $rangeOutput .="}";
-  return $rangeOutput;
+  return "{".rangeOutput(setStartLoop($range), setEndLoop($range))."}";
 }
 
 function setEndLoop($range) {
