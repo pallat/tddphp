@@ -1,31 +1,37 @@
 <?php
 
 function rangeZeroToFive($range) {
-  $rangeOutput ="{";
+  return "{".rangeOutput(setStartLoop($range), setEndLoop($range))."}";
+}
 
+function setEndLoop($range) {
   $rangeInput = explode(",",substr($range,1,3));
+  if ($range[strlen($range)-1] == "]"){
+    $endLoop = $rangeInput[1];
+  }else{
+    $endLoop = $rangeInput[1] -1;
+  }
+  return $endLoop;
+}
 
+function setStartLoop($range) {
+  $rangeInput = explode(",",substr($range,1,3));
+  if($range[0] == "[") {
+    $startLoop = $rangeInput[0];
+  } else {
+    $startLoop = $rangeInput[0] + 1;
+  }
+  return $startLoop;
+}
 
-    if($range[0] == "[") {
-	$startLoop = $rangeInput[0];
-    } else {
-	$startLoop = $rangeInput[0] + 1;
+function rangeOutput($startLoop, $endLoop) {
+  $rangeOutput="";
+  if($endLoop >= $startLoop){
+    for($index=$startLoop;$index<=$endLoop;$index++){
+      $rangeMemberArray[$index] = $index;
     }
 
-    if ($range[strlen($range)-1] == "]"){
-	$endLoop = $rangeInput[1];
-    }else{
-	$endLoop = $rangeInput[1] -1;
-    }
-
-    if($endLoop >= $startLoop){
-      for($index=$startLoop;$index<=$endLoop;$index++){
-	$rangeMemberArray[$index] = $index;
-      }
-    
-      $rangeOutput .= implode($rangeMemberArray,",");
-    }
-
-  $rangeOutput .="}";
+    $rangeOutput .= implode($rangeMemberArray,",");
+  }
   return $rangeOutput;
 }
